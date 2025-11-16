@@ -1,0 +1,29 @@
+<div class="music-page">
+  <h1>Danh sách bài hát</h1>
+  <div v-if="getLoding" class="loading">Đang tải dữ liệu...</div>
+  <div v-if="getError" class="error">{{ getError }}</div>
+  <table v-if="!getLoding && getListSong.length">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>Tên bài hát</th>
+        <th>Nhạc sĩ</th>
+        <th>Album</th>
+        <th>Chức năng</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="song in getListSong" :key="song.id">
+        <td>{{ song.id }}</td>
+        <td>{{ song.title }}</td>
+        <td>{{ song.artist }}</td>
+        <td>{{ song.album }}</td>
+        <td>
+          <a href="#" class="edit"><i class="fa fa-pencil"></i></a>
+          <a href="#" class="trash"><i class="fa fa-trash-o"></i></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div v-if="!getLoding && !getListSong.length">Chưa có bài hát nào.</div>
+</div>

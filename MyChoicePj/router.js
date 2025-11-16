@@ -1,13 +1,12 @@
-import FavouriteMusicSearchPage from './pages/FavouriteMusic/FavouriteMusicSearch.js';
-import FavouriteMusicAddPage from './pages/FavouriteMusic/FavouriteMusicAdd.js';
+import FavouriteMusicContainerView from './container/FavouriteMusic.js';
 import MenuAdminPage from './components/MenuAdmin.js';
 
 const { createApp } = Vue;
 const { createRouter, createWebHashHistory, RouterView } = VueRouter;
 
 const routes = [
-  { path:'/favourite_music', component:FavouriteMusicSearchPage },
-  { path:'/favourite_music/add', component:FavouriteMusicAddPage }
+  { path:'/favourite_music', component:FavouriteMusicContainerView.FavouriteMusicSearchPage },
+  { path:'/favourite_music/add', component:FavouriteMusicContainerView.FavouriteMusicAddPage }
 ]
 
 const router = createRouter({
