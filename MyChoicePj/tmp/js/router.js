@@ -1,5 +1,6 @@
 import FavouriteMusicContainerView from '../../containers/FavouriteMusic.js';
-import MenuAdminPage from '../../components/MenuAdmin.js';
+import MenuAdminView from '../../components/MenuAdmin.js';
+import FooterAdminView from '../../components/FooterAdmin.js';
 
 const { createApp } = Vue;
 const { createRouter, createWebHashHistory, RouterView } = VueRouter;
@@ -9,16 +10,19 @@ const routes = [
   { path:'/favourite_music/add', component:FavouriteMusicContainerView.FavouriteMusicAddPage }
 ]
 
-const router = createRouter({
-    history: createWebHashHistory(),
-    routes,
+// MenuAdmin view
+const Router = createRouter({
+  history: createWebHashHistory(),
+  routes,
 })
+createApp(MenuAdminView).use(Router).mount('.menu-admin');
 
-createApp(MenuAdminPage).use(router).mount('.menu-admin')
-
-const MainBody = {
+// Router view
+const RouterViewMain = {
   components: { RouterView },
   template: `<router-view></router-view>`
 }
+createApp(RouterViewMain).use(Router).mount('#main-body');
 
-createApp(MainBody).use(router).mount('#main-body')
+// FooterAdmin view
+createApp(FooterAdminView).mount('#footer');

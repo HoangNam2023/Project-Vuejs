@@ -1,4 +1,4 @@
-<div class="music-page">
+
   <div v-if="getLoding" class="loading">Đang tải dữ liệu...</div>
   <div v-if="getError" class="error">{{ getError }}</div>
   <table v-if="!getLoding && getListSong.length">
@@ -32,4 +32,3 @@
     <span>Trang {{ page }} / {{ totalPages }}</span>
     <button @click="changePage(page + 1)" :disabled="page === totalPages">Tiếp »</button>
   </div>
-</div>

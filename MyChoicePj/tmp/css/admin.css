@@ -1,4 +1,4 @@
-/** background common **/
+/** Body **/
 .body {
   margin: 0;
   padding: 0;
@@ -6,16 +6,15 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/** Background common **/
 .admin-ui {
   display: flex;
   flex-direction: column;
 }
-
 .admin-ui #header {
   height: 39px;
   background-color: #e5e7eb;
 }
-
 .admin-ui #footer {
   margin-top: 8px;
   padding-top: 6px;
@@ -24,24 +23,23 @@
   text-align: center;
   font-weight: bold;
 }
-
 .admin-ui #footer p {
   margin: 0;
 }
-
 .admin-ui #main {
   display: flex;
   flex-direction: row;
 }
 
+/** Main left **/
 .admin-ui #main #main-left {
   width: 20%;
-  height: 100vh;
   background-color: #4a6572;
   margin-top: -39px;
   color: #d1d5db;
 }
 
+/** Main right **/
 .admin-ui #main #main-right {
   width: 80%;
   height: 100%;
@@ -57,61 +55,53 @@
   color: #111;
   text-align: center;
 }
-.admin-ui #main #main-right h2 {
+.admin-ui #main #main-right .title-function {
+  font-weight: bold;
+  font-size: 21px;
   background: antiquewhite;
 }
-.admin-ui #main #main-right h2 p {
-  margin-left: 14px;
+.admin-ui #main #main-right .title-function p {
+  margin-left: 10px;
+  padding: 5px;
 }
-.admin-ui #main #main-right h2 p i {
-  margin-right: 8px;
+.admin-ui #main #main-right .title-function p i {
+  margin-right: 9px;
 }
 
+/** Table main right **/
 .admin-ui #main #main-right table {
-  font-family: arial, sans-serif;
+  font-family: 'Arial', sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
-
-.music-page {
-  font-family: Arial, sans-serif;
-  margin: 20px;
+.admin-ui #main #main-right table.no-search td{
+  border: none;
+  background: #fff;
 }
-
-table {
+.admin-ui #main #main-right table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
 }
-
-table th, table td {
+.admin-ui #main #main-right table th,
+.admin-ui #main #main-right table td {
   padding: 12px;
   text-align: left;
   border: 1px solid #ddd;
 }
-
-table th {
+.admin-ui #main #main-right table th {
   background-color: #f4f4f4;
-  color: #333;
   font-weight: bold;
 }
-
-table tr:nth-child(even) {
+.admin-ui #main #main-right table tbody tr:nth-child(odd) {
   background-color: #f9f9f9;
 }
-
-table tr:hover {
+.admin-ui #main #main-right table tbody tr:hover {
   background-color: #f1f1f1;
+  cursor: pointer;
 }
-
-table td a {
-  text-decoration: none;
-  margin: 0 5px;
-  color: #007bff;
-}
-
-table td a:hover {
-  color: #0056b3;
+.admin-ui #main #main-right table td {
+  font-size: 15px;
 }
 
 /** Button chỉnh sửa **/
@@ -152,7 +142,79 @@ table td a.trash-btn:hover {
   transform: scale(1.05);
 }
 
+/** Button back **/
+button.back-btn {
+  background-color: #6c757d;
+  /* Màu xám */
+  color: white;
+  /* Màu chữ trắng */
+  padding: 10px 20px;
+  /* Kích thước nút */
+  border: none;
+  /* Không viền */
+  border-radius: 6px;
+  /* Bo tròn góc */
+  font-size: 16px;
+  /* Kích thước chữ */
+  font-weight: 500;
+  cursor: pointer;
+  /* Con trỏ bàn tay */
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+button.back-btn:hover {
+  background-color: #5a6268;
+  /* Màu khi hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Đổ bóng nhẹ */
+}
+button.back-btn:active {
+  transform: scale(0.98);
+}
+
+/** Button update **/
+button.update-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+button.update-btn:hover {
+  background-color: #218838;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+button.update-btn:active {
+  transform: scale(0.98);
+}
+
+/** Button thêm mới **/
+.add-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 9px 9px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+.add-btn i {
+  margin-right: 8px;
+}
+.add-btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.02);
+}
+
 /** Menu admin **/
+.admin-ui #main #main-left h2 {
+  margin-left: 15px;
+}
 .admin-ui #main #main-left .menu-admin div.menu {
   color: #f1f1f1;
   width: 100%;
@@ -213,23 +275,16 @@ table td a.trash-btn:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.admin-ui #edit-form table td {
-  border: none;
-  background: #fff;
-}
-
+/** css common **/
 .admin-ui #main #main-right .set-text-c {
   text-align: center;
 }
-
 .admin-ui #main #main-right .set-text-r {
   text-align: right;
 }
-
 .admin-ui #main #main-right .set-w-130px {
   width: 130px;
 }
-
 .admin-ui #main #main-right .set-mb-7px {
   margin-bottom: 7px;
 }
@@ -239,7 +294,6 @@ table td a.trash-btn:hover {
 .admin-ui #main #main-right .set-w-70px {
   width: 70px;
 }
-
 input[type="text"],
 input[type="datetime-local"] {
   width: 40%;
@@ -251,7 +305,6 @@ input[type="datetime-local"] {
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: border-color 0.3s, box-shadow 0.3s;
 }
-
 input[type="text"]:focus,
 input[type="datetime-local"]:focus {
   border-color: #007bff;
@@ -259,117 +312,15 @@ input[type="datetime-local"]:focus {
   outline: none;
 }
 
-button.update-btn {
-  background-color: #28a745;
-  /* Màu xanh lá */
-  color: white;
-  /* Màu chữ trắng */
-  padding: 10px 20px;
-  /* Kích thước nút */
-  border: none;
-  /* Không viền */
-  border-radius: 6px;
-  /* Bo tròn góc */
-  font-size: 16px;
-  /* Kích thước chữ */
-  font-weight: 500;
-  cursor: pointer;
-  /* Con trỏ bàn tay */
-  transition: background-color 0.3s, box-shadow 0.3s;
-}
-
-button.update-btn:hover {
-  background-color: #218838;
-  /* Màu khi hover */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* Đổ bóng nhẹ */
-}
-
-button.update-btn:active {
-  transform: scale(0.98);
-}
-
-.add-btn {
-  background-color: #007bff;
-  /* Xanh dương */
-  color: white;
-  padding: 9px 9px;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-.add-btn i {
-  margin-right: 8px;
-  /* Khoảng cách giữa icon và chữ */
-}
-
-.add-btn:hover {
-  background-color: #0056b3;
-  transform: scale(1.02);
-}
-
-button.back-btn {
-  background-color: #6c757d;
-  /* Màu xám */
-  color: white;
-  /* Màu chữ trắng */
-  padding: 10px 20px;
-  /* Kích thước nút */
-  border: none;
-  /* Không viền */
-  border-radius: 6px;
-  /* Bo tròn góc */
-  font-size: 16px;
-  /* Kích thước chữ */
-  font-weight: 500;
-  cursor: pointer;
-  /* Con trỏ bàn tay */
-  transition: background-color 0.3s, box-shadow 0.3s;
-}
-
-button.back-btn:hover {
-  background-color: #5a6268;
-  /* Màu khi hover */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* Đổ bóng nhẹ */
-}
-
-button.back-btn:active {
-  transform: scale(0.98);
-}
-
-
-
-.music-page {
-  margin: 40px auto;
-  text-align: center;
-  font-family: Arial, sans-serif;
-}
-
-.song-list {
-  list-style: none;
-  padding: 0;
-  margin-top: 20px;
-  text-align: left;
-}
-
-.song-item {
-  border-bottom: 1px solid #ccc;
-  padding: 8px 0;
-}
-
+/** Hiệu ứng **/
 .loading {
   color: blue;
 }
-
 .error {
   color: red;
 }
 
+/** Cảnh báo error **/
 .alert.success {
   padding: 10px;
   background: #daf5d8;
@@ -383,7 +334,6 @@ button.back-btn:active {
   text-align: center;
   margin-top: 20px;
 }
-
 .pagination button {
   padding: 8px 16px;
   margin: 0 5px;
@@ -393,16 +343,13 @@ button.back-btn:active {
   border-radius: 4px;
   cursor: pointer;
 }
-
 .pagination button:hover {
   background-color: #0056b3;
 }
-
 .pagination button:disabled {
   background-color: #ddd;
   cursor: not-allowed;
 }
-
 .pagination span {
   font-size: 14px;
   margin: 0 10px;
