@@ -1,5 +1,5 @@
-import FavouriteMusicContainerView from './container/FavouriteMusic.js';
-import MenuAdminPage from './components/MenuAdmin.js';
+import FavouriteMusicContainerView from '../../containers/FavouriteMusic.js';
+import MenuAdminPage from '../../components/MenuAdmin.js';
 
 const { createApp } = Vue;
 const { createRouter, createWebHashHistory, RouterView } = VueRouter;

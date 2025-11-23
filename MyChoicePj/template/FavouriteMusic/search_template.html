@@ -1,5 +1,4 @@
 <div class="music-page">
-  <h1>Danh sách bài hát</h1>
   <div v-if="getLoding" class="loading">Đang tải dữ liệu...</div>
   <div v-if="getError" class="error">{{ getError }}</div>
   <table v-if="!getLoding && getListSong.length">
@@ -13,17 +12,24 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="song in getListSong" :key="song.id">
+      <tr v-for="song in paginatedSongs" :key="song.id">
         <td>{{ song.id }}</td>
         <td>{{ song.title }}</td>
         <td>{{ song.artist }}</td>
         <td>{{ song.album }}</td>
         <td>
-          <a href="#" class="edit"><i class="fa fa-pencil"></i></a>
-          <a href="#" class="trash"><i class="fa fa-trash-o"></i></a>
+          <a href="#" class="edit-btn"><i class="fa fa-pencil"> Chỉnh sửa</i></a>
+          <a href="#" class="trash-btn"><i class="fa fa-trash-o"> Xóa</i></a>
         </td>
       </tr>
     </tbody>
   </table>
   <div v-if="!getLoding && !getListSong.length">Chưa có bài hát nào.</div>
+
+  <!-- Phân trang -->
+  <div v-if="!getLoding && getListSong.length" class="pagination">
+    <button @click="changePage(page - 1)" :disabled="page === 1">« Trước</button>
+    <span>Trang {{ page }} / {{ totalPages }}</span>
+    <button @click="changePage(page + 1)" :disabled="page === totalPages">Tiếp »</button>
+  </div>
 </div>

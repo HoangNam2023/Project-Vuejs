@@ -1,18 +1,11 @@
+import FavouriteMusicAddModel from '../../models/FavouriteMusic/FavouriteMusicAdd.js';
 async function FavouriteMusicAddPage () {
   const html = await fetch('./template/FavouriteMusic/add_template.html').then(r => r.text());
   return {
     template: html,
     data() {
       return {
-        form: {
-          id: '',
-          title: '',
-          artist: '',
-          album: '',
-          release_year: '',
-          created_at: '',
-          updated_at: ''
-        }
+        form: FavouriteMusicAddModel.FavouriteMusicAddForm
       }
     },
     methods: {
@@ -28,7 +21,10 @@ async function FavouriteMusicAddPage () {
 
           const result = await response.json();
           if (result.status === 'success') {
-            alert('🎵 Thêm mới thành công!');
+            
+            this.isSuccess = true;
+    this.message = "Thêm bài hát thành công!";
+
             this.resetForm();
           } else {
             alert('❌ ' + result.message);
