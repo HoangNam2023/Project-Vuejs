@@ -294,6 +294,18 @@ button.update-btn:active {
 .admin-ui #main #main-right .set-w-70px {
   width: 70px;
 }
+.admin-ui #main #main-right .set-w-300px {
+  width: 300px;
+}
+.admin-ui #main #main-right .set-mr-10px {
+  margin-right: 10px;
+}
+.admin-ui #main #main-right .set-mr-15px {
+  margin-right: 15px;
+}
+.admin-ui #main #main-right .set-mr-43px {
+  margin-right: 43px;
+}
 input[type="text"],
 input[type="datetime-local"] {
   width: 40%;

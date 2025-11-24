@@ -3,7 +3,7 @@ const FavouriteMusicAddModel = Vue.reactive({
         title: '',
         artist: 'ssss',
         album: '',
-        release_year: '',
+        release_year: 's',
         created_at: '',
         updated_at: ''
     }

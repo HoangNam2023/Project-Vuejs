@@ -5,7 +5,8 @@ async function FavouriteMusicAddPage () {
     template: html,
     data() {
       return {
-        form: FavouriteMusicAddModel.FavouriteMusicAddForm
+        form: FavouriteMusicAddModel.FavouriteMusicAddForm,
+        isSuccess: false
       }
     },
     methods: {
@@ -18,13 +19,10 @@ async function FavouriteMusicAddPage () {
             },
             body: JSON.stringify(this.form)
           });
-
           const result = await response.json();
           if (result.status === 'success') {
-            
             this.isSuccess = true;
-    this.message = "Thêm bài hát thành công!";
-
+            this.message = "Thêm bài hát thành công!";
             this.resetForm();
           } else {
             alert('❌ ' + result.message);
@@ -35,15 +33,12 @@ async function FavouriteMusicAddPage () {
         }
       },
       resetForm() {
-        this.form = {
-          id: '',
-          title: '',
-          artist: '',
-          album: '',
-          release_year: '',
-          created_at: '',
-          updated_at: ''
-        };
+        this.form.title = '';
+        this.form.artist = '';
+        this.form.album = '';
+        this.form.release_year = '';
+        this.form.created_at = '';
+        this.form.updated_at = '';
       }
     }
   };

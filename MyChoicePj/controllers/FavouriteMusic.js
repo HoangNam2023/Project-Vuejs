@@ -21,6 +21,21 @@ const FavouriteMusicController = Vue.reactive({
           this.loading = false;
         }
     },
+    async deleteSong(songId) {
+      try {
+        this.loading = true;
+        const res = await fetch(window.env.API_URL + `/api/favourite_music_delete.php?id=${songId}`, {
+          method: "POST"
+        });
+        const data = await res.json();
+        if (!data.success) throw new Error(data.message);
+        await this.fetchSongs();
+      } catch (e) {
+        this.error = e.message;
+      } finally {
+        this.loading = false;
+      }
+    }
 })
 
 export default FavouriteMusicController;
