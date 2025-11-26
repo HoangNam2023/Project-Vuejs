@@ -1,13 +1,14 @@
 import FavouriteMusicContainerView from '../../containers/FavouriteMusic.js';
 import MenuAdminView from '../../components/MenuAdmin.js';
 import FooterAdminView from '../../components/FooterAdmin.js';
-
+// Đây là lớp route
 const { createApp } = Vue;
 const { createRouter, createWebHashHistory, RouterView } = VueRouter;
 
+// Đây là route của các màn hình
 const routes = [
-  { path:'/favourite_music', component:FavouriteMusicContainerView.FavouriteMusicSearchPage },
-  { path:'/favourite_music/add', component:FavouriteMusicContainerView.FavouriteMusicAddPage }
+  { path:'/favourite_music', component:FavouriteMusicContainerView.FavouriteMusicSearchView },
+  { path:'/favourite_music/add', component:FavouriteMusicContainerView.FavouriteMusicAddView }
 ]
 
 // MenuAdmin view

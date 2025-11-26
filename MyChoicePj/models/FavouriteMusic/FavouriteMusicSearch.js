@@ -1,3 +1,4 @@
+// Lớp model FavouriteMusic search
 const FavouriteMusicSearchModel = Vue.reactive({
     songs: []
 });

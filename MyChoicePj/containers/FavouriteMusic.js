@@ -1,9 +1,10 @@
-import FavouriteMusicSearchPage from '../views/FavouriteMusic/FavouriteMusicSearch.js';
-import FavouriteMusicAddPage from '../views/FavouriteMusic/FavouriteMusicAdd.js';
+import FavouriteMusicSearchView from '../views/FavouriteMusic/FavouriteMusicSearch.js';
+import FavouriteMusicAddView from '../views/FavouriteMusic/FavouriteMusicAdd.js';
 
+// Lớp container FavouriteMusic
 const FavouriteMusicContainerView = {
-    FavouriteMusicSearchPage: FavouriteMusicSearchPage,
-    FavouriteMusicAddPage: FavouriteMusicAddPage 
+    FavouriteMusicSearchView: FavouriteMusicSearchView,
+    FavouriteMusicAddView: FavouriteMusicAddView 
 };
 
 export default FavouriteMusicContainerView;

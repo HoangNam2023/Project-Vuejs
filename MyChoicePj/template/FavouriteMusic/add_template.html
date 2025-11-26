@@ -1,4 +1,4 @@
-<form id="add-form" method="post" @submit.prevent="handleSubmit">
+<form id="add-form" method="post" @submit.prevent="addFavouriteMusic">
   <table class="no-search">
     <tbody>
       <tr>
@@ -6,7 +6,7 @@
           <strong>Tên bài hát</strong>
         </td>
         <td>
-          <input type="text" v-model="form.title" name="title" value="">
+          <input type="text" v-model="formAdd.title" name="title" value="">
         </td>
       </tr>
       <tr>
@@ -14,7 +14,7 @@
           <strong>Nhạc sĩ</strong>
         </td>
         <td>
-          <input type="text" v-model="form.artist" name="artist" value="">
+          <input type="text" v-model="formAdd.artist" name="artist" value="">
         </td>
       </tr>
       <tr>
@@ -22,7 +22,7 @@
           <strong>Album</strong>
         </td>
         <td>
-          <input type="text" v-model="form.album" name="album" value="">
+          <input type="text" v-model="formAdd.album" name="album" value="">
         </td>
       </tr>
       <tr>
@@ -30,7 +30,7 @@
           <strong>Ngày phát hành</strong>
         </td>
         <td>
-          <input type="text" v-model="form.release_year" name="release_year" value="">
+          <input type="text" v-model="formAdd.release_year" name="release_year" value="">
         </td>
       </tr>
       <tr>
@@ -38,7 +38,7 @@
           <strong>Ngày tạo</strong>
         </td>
         <td>
-          <input type="datetime-local" v-model="form.created_at" name="created_at" value="">
+          <input type="datetime-local" v-model="formAdd.created_at" name="created_at" value="">
         </td>
       </tr>
       <tr>
@@ -46,7 +46,7 @@
           <strong>Ngày cập nhật</strong>
         </td>
         <td>
-          <input type="datetime-local" v-model="form.updated_at" name="updated_at" value="">
+          <input type="datetime-local" v-model="formAdd.updated_at" name="updated_at" value="">
         </td>
       </tr>
       <tr>

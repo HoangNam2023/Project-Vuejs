@@ -7,6 +7,10 @@ const FavouriteMusicController = Vue.reactive({
     init(model) {
         this.model = model;
     },
+
+    /**
+     * Xử lý thu thập danh sách bài hát
+     */
     async fetchSongs() {
         this.loading = true;
         this.error = null;
@@ -21,6 +25,11 @@ const FavouriteMusicController = Vue.reactive({
           this.loading = false;
         }
     },
+
+    /**
+     * Xử lý xóa bài hát
+     * @param {int} songId 
+     */
     async deleteSong(songId) {
       try {
         this.loading = true;
@@ -35,7 +44,27 @@ const FavouriteMusicController = Vue.reactive({
       } finally {
         this.loading = false;
       }
+    },
+
+    /**
+     * Xử lý search bài hát
+     * @param {array} filters 
+     */
+    async searchSongs(filters = {}) {
+      try {
+        this.loading = true;
+        this.error = null;
+        const params = new URLSearchParams(filters).toString();
+        const res = await fetch(window.env.API_URL + `/api/favourite_music_search_condition.php?${params}`);
+        const data = await res.json();
+        this.model.songs = data;
+      } catch (err) {
+        this.error = "Lỗi khi tải dữ liệu!";
+      } finally {
+        this.loading = false;
+      }
     }
-})
+  }
+)
 
 export default FavouriteMusicController;
