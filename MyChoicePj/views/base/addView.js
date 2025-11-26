@@ -1,8 +1,7 @@
 /**
- * Tạo component Vue cho màn hình tìm kiếm.
+ * Tạo component Vue cho màn hình thêm mới.
  */
-function searchView({ template, model, controller, page, formSearch = {}, pageSize, computed = {}, methods = {}, mounted = null }) {
-  controller?.init?.(model);
+function addView({ template, model, isSuccess = false, formAdd = {}, computed = {}, methods = {}, mounted = null }) {
   return {
     // Template
     template,
@@ -11,10 +10,8 @@ function searchView({ template, model, controller, page, formSearch = {}, pageSi
     data() {
       return {
         model,
-        controller,
-        formSearch,
-        page, 
-        pageSize,
+        formAdd,
+        isSuccess
       };
     },
 
@@ -35,4 +32,4 @@ function searchView({ template, model, controller, page, formSearch = {}, pageSi
   };
 }
 
-export default searchView;
+export default addView;

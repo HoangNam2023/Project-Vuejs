@@ -18,7 +18,7 @@ try {
 
 
 // Câu lệnh SQL
-$sql = "SELECT * FROM songs";
+$sql = "SELECT * FROM songs ORDER BY id desc";
 
 // Thực thi truy vấn
 $stmt = $pdo->prepare($sql);
