@@ -1,22 +1,14 @@
 /**
  * Tạo component Vue cho màn hình tìm kiếm.
  */
-function searchView({ template, model, controller, page, formSearch = {}, pageSize, computed = {}, methods = {}, mounted = null }) {
-  controller?.init?.(model);
+function searchView({ template,components,data, computed = {}, methods = {}, mounted = null }) {
+  
   return {
     // Template
     template,
-
-    // Dữ liệu khởi tạo khi component được tạo
-    data() {
-      return {
-        model,
-        controller,
-        formSearch,
-        page, 
-        pageSize,
-      };
-    },
+    components,
+ // data hoàn toàn do hàm con cung cấp
+    data: data || (() => ({})),
 
     // Gắn thêm computed property tùy chỉnh
     computed: {

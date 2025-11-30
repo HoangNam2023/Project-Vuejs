@@ -1,18 +1,29 @@
 import BaseSearchView from '../base/searchView.js';
 import FavouriteMusicModel from '../../models/FavouriteMusic/FavouriteMusicSearch.js';
 import FavouriteMusicController from '../../controllers/FavouriteMusic.js';
+import confirmDialogView from '../../components/modals/ConfirmDelete.js';
 
 // Lớp view FavouriteMusicSearch
 async function FavouriteMusicSearchView() {
   const FavouriteMusicSearchTemplate = await fetch('./template/FavouriteMusic/search_template.html').then(r => r.text());
-
+FavouriteMusicController?.init?.(FavouriteMusicModel);
+  // Tạo component confirm dialog
+  const confirmDialog = confirmDialogView({
+    message: "Bạn có chắc muốn xóa bài hát này?",
+    confirmCallback: async (id) => {
+      await FavouriteMusicController.deleteSong(id);
+      FavouriteMusicController.fetchSongs?.();
+    }
+  });
   // Kế thừa BaseSearchView
   return BaseSearchView({
     /**
      * @override
      */
     template: FavouriteMusicSearchTemplate,
-    model: FavouriteMusicModel,
+     data() {
+      return {
+            model: FavouriteMusicModel,
     controller: FavouriteMusicController,
     page: 1,
     pageSize: 5,
@@ -21,6 +32,13 @@ async function FavouriteMusicSearchView() {
       artist: '',
       album: ''
     },
+    showDeleteModal: false,
+    deleteId: null,
+      };
+    },
+
+
+    components: { 'confirm-dialog': confirmDialog },
 
     /**
      * Xử lý computed
@@ -101,6 +119,11 @@ async function FavouriteMusicSearchView() {
         this.formSearch.artist = '',
         this.formSearch.album = ''
         this.controller.fetchSongs?.();
+      },
+
+      // Mở modal và lưu id bài hát muốn xóa
+      openDeleteModal(id) {
+        this.$refs.confirmDialog.open(id);
       }
     },
 

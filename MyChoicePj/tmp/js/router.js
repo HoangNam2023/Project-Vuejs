@@ -1,6 +1,7 @@
 import FavouriteMusicContainerView from '../../containers/FavouriteMusic.js';
 import MenuAdminView from '../../components/MenuAdmin.js';
 import FooterAdminView from '../../components/FooterAdmin.js';
+import showTitleScreenAdmin from '../../components/handle/TitleScreenAdmin.js';
 // Đây là lớp route
 const { createApp } = Vue;
 const { createRouter, createWebHashHistory, RouterView } = VueRouter;
@@ -27,3 +28,6 @@ createApp(RouterViewMain).use(Router).mount('#main-body');
 
 // FooterAdmin view
 createApp(FooterAdminView).mount('#footer');
+
+// Hiển thị title screen admin
+showTitleScreenAdmin(Router);

@@ -51,7 +51,7 @@
       <td>{{ song.album }}</td>
       <td>
         <a href="#" class="edit-btn"><i class="fa fa-pencil"> Chỉnh sửa</i></a>
-        <a href="#" class="trash-btn" @click.prevent="controller.deleteSong(song.id)"><i class="fa fa-trash-o">
+        <a href="#" class="trash-btn" @click.prevent="openDeleteModal(song.id)"><i class="fa fa-trash-o">
             Xóa</i></a>
       </td>
     </tr>
@@ -65,3 +65,17 @@
   <span>Trang {{ page }} / {{ totalPages }}</span>
   <button @click="changePage(page + 1)" :disabled="page === totalPages">Tiếp »</button>
 </div>
+
+<!-- Modal Xác nhận
+<div v-if="showDeleteModal" class="modal-overlay">
+  <div class="modal-content">
+    <i class="fa fa-trash-o"></i>
+    <h3>Xác nhận xóa</h3>
+    <p>Bạn có chắc muốn xóa bài hát này?</p>
+    <div class="modal-buttons">
+      <button class="confirm-yes-btn" @click="confirmDelete(true)">Đồng ý</button>
+      <button class="confirm-no-btn" @click="confirmDelete(false)">Hủy</button>
+    </div>
+  </div>
+</div> -->
+<confirm-dialog ref="confirmDialog"></confirm-dialog>

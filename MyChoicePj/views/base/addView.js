@@ -1,19 +1,14 @@
 /**
  * Tạo component Vue cho màn hình thêm mới.
  */
-function addView({ template, model, isSuccess = false, formAdd = {}, computed = {}, methods = {}, mounted = null }) {
+function addView({ template, components,data, computed = {}, methods = {}, mounted = null }) {
   return {
     // Template
     template,
+    components,
 
-    // Dữ liệu khởi tạo khi component được tạo
-    data() {
-      return {
-        model,
-        formAdd,
-        isSuccess
-      };
-    },
+ // data hoàn toàn do hàm con cung cấp
+    data: data || (() => ({})),
 
     // Gắn thêm computed property tùy chỉnh
     computed: {
