@@ -394,3 +394,51 @@ input[type="datetime-local"]:focus {
   font-size: 14px;
   margin: 0 10px;
 }
+
+/** Modal **/
+.modal-overlay {
+  position: fixed;
+  top:0; left:0; right:0; bottom:0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 8px;
+  min-width: 300px;
+  text-align: center;
+}
+
+.modal-content .fa-trash-o {
+  font-size: 52px;
+  color: #85888b;
+}
+
+.modal-buttons button {
+  margin: 0 10px;
+  padding: 6px 12px;
+  border-radius: 3px;
+  border: none;
+}
+
+.modal-buttons button:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.modal-buttons .confirm-no-btn {
+  border: 1px solid gray;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, border-color 0.3s, transform 0.2s ease;
+}
+
+.modal-buttons .confirm-yes-btn {
+  color: #fff;
+  border: 1px solid #00aaff;
+  background-color: #00aaff;
+}

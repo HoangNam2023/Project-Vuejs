@@ -1,15 +1,25 @@
 import BaseAddView from '../base/addView.js';
 import FavouriteMusicAddModel from '../../models/FavouriteMusic/FavouriteMusicAdd.js';
+import confirmDialogView from '../../components/modals/SuccessDialog.js';
 // Lớp view FavouriteMusicAddView
 async function FavouriteMusicAddView () {
   const FavouriteMusicAddTemplate = await fetch('./template/FavouriteMusic/add_template.html').then(r => r.text());
+  // Tạo component confirm dialog
+  const successDialog = confirmDialogView({
+    message: "Đăng ký bài hát yêu thích thành công!",
+  });
   return BaseAddView({
     /**
      * @override
      */
     template: FavouriteMusicAddTemplate,
-    formAdd: FavouriteMusicAddModel,
-    isSuccess: false,
+    data() {
+      return {
+        formAdd: FavouriteMusicAddModel,
+        isSuccess: false,
+      }
+    },
+    components: { 'success-dialog': successDialog },
 
     /**
      * Xử lý methods
@@ -34,6 +44,7 @@ async function FavouriteMusicAddView () {
             this.isSuccess = true;
             this.message = "Thêm bài hát thành công!";
             this._resetFormAdd();
+            this.$refs.successDialog.show();
           } else {
             alert(result.message);
           }
