@@ -56,29 +56,20 @@ $updated_at   = $data['updated_at'] ?? date("Y-m-d H:i:s");
 // ------------------------
 // ⚠️ Kiểm tra dữ liệu bắt buộc
 // ------------------------
-
-$errors = [];
-if (empty($title)) {
-    $errors[] = "Vui lòng nhập đầy đủ Tên bài hát!";
-}
-
-if (empty($artist)) {
-    $errors[] = "Vui lòng nhập đầy đủ Nhạc sĩ!";
-}
-
-if (!empty($errors)) {
+if (empty($title) || empty($artist)) {
     echo json_encode([
         "status" => "error",
-        "message" => $errors
+        "message" => "Vui lòng nhập đầy đủ Tên bài hát và Nhạc sĩ!"
     ]);
     exit;
 }
+
 // ------------------------
 // 💾 Thực hiện thêm vào database
 // ------------------------
-$stmt = $conn->prepare("INSERT INTO songs 
-    (id, title, artist, album, release_year, created_at, updated_at) 
-    VALUES (?, ?, ?, ?, ?, ?, ?)");
+$stmt = $conn->prepare("Update songs set title = ? , artist = ?
+, album = ? , release_year = ? , created_at = ? , updated_at = ?
+where id = ?");
 
 if (!$stmt) {
     echo json_encode([
@@ -88,17 +79,17 @@ if (!$stmt) {
     exit;
 }
 
-$stmt->bind_param("sssssss", $id, $title, $artist, $album, $release_year, $created_at, $updated_at);
+$stmt->bind_param("sssssss", $title, $artist, $album, $release_year, $created_at, $updated_at, $id);
 
 if ($stmt->execute()) {
     echo json_encode([
         "status" => "success",
-        "message" => "🎵 Thêm mới bài hát thành công!"
+        "message" => "🎵 Cập nhật bài hát thành công!"
     ]);
 } else {
     echo json_encode([
         "status" => "error",
-        "message" => "❌ Lỗi khi thêm bài hát: " . $stmt->error
+        "message" => "❌ Lỗi khi cập nhật bài hát: " . $stmt->error
     ]);
 }
 

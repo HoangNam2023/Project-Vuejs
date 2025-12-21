@@ -1,0 +1,74 @@
+<form id="add-form" method="post" @submit.prevent="updateFavouriteMusic">
+  <div v-if="getLoading" class="loading-overlay">
+    <div class="spinner"></div>
+    <p>Đang tải dữ liệu...</p>
+  </div>
+  <table v-if="!getLoading" class="no-search">
+    <tbody>
+      <tr>
+        <td class="set-w-130px">
+          <strong>Tên bài hát</strong>
+        </td>
+        <td>
+          <input type="hidden" v-model="formUpdate.id" name="id">
+          <input type="text" v-model="formUpdate.title" name="title">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Nhạc sĩ</strong>
+        </td>
+        <td>
+          <input type="text" v-model="formUpdate.artist" name="artist">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Album</strong>
+        </td>
+        <td>
+          <input type="text" v-model="formUpdate.album" name="album">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Ngày phát hành</strong>
+        </td>
+        <td>
+          <input type="text" v-model="formUpdate.release_year" name="release_year">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Ngày tạo</strong>
+        </td>
+        <td>
+          <input type="datetime-local" v-model="formUpdate.created_at" name="created_at">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Ngày cập nhật</strong>
+        </td>
+        <td>
+          <input type="datetime-local" v-model="formUpdate.updated_at" name="updated_at">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" class="set-text-c">
+          <button class="update-btn" type="submit">
+            <i class="fa fa-tasks"></i> Cập nhật
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Thông báo thành công nếu có -->
+   <transition name="fade">
+    <div v-if="isSuccess" class="alert success">
+      {{ message }}
+    </div>
+  </transition>
+  <message-box ref="messageBox"></message-box>
+</form>
