@@ -1,7 +1,8 @@
 import BaseSearchView from '../base/searchView.js';
 import FavouriteMusicModel from '../../models/favouriteMusic/searchModel.js';
 import FavouriteMusicController from '../../controllers/FavouriteMusic/searchController.js';
-import confirmDialogView from '../../components/modals/confirmDelete.js';
+import confirmDialogView from '../../components/modals/confirmDialog.js';
+import messageNoDataSearchView from '../../components/messageNoDataSearch.js';
 
 // Lớp view FavouriteMusicSearch
 async function FavouriteMusicSearchView() {
@@ -14,6 +15,11 @@ async function FavouriteMusicSearchView() {
       await FavouriteMusicController.deleteSong(id);
       FavouriteMusicController.fetchSongs?.();
     }
+  });
+  // Tạo component không có kết quả search
+  const messageNoDataSearch = messageNoDataSearchView({
+    searchController: FavouriteMusicController,
+    searchModel: FavouriteMusicModel
   });
   // Kế thừa BaseSearchView
   return BaseSearchView({
@@ -37,7 +43,14 @@ async function FavouriteMusicSearchView() {
       };
     },
 
-    components: { 'confirm-dialog': confirmDialog },
+    /**
+     * Khai báo component
+     * @override
+     */
+    components: {
+      'confirm-dialog': confirmDialog,
+      'message-no-data-search': messageNoDataSearch 
+    },
 
     /**
      * Xử lý computed
@@ -73,10 +86,10 @@ async function FavouriteMusicSearchView() {
       },
 
       /**
-       * Thu thập message
+       * Thu thập message xóa thành công
        */
-      getisSuccess() {
-        return this.controller.isSuccess;
+      getIsDeleteSuccess() {
+        return this.controller.isDeleteSuccess;
       },
 
       /**
@@ -122,6 +135,7 @@ async function FavouriteMusicSearchView() {
           artist: this.formSearch.artist,
           album: this.formSearch.album
         });
+        this.controller.isDeleteSuccess = false;
       },
 
       /**
@@ -136,7 +150,7 @@ async function FavouriteMusicSearchView() {
 
       // Mở modal và lưu id bài hát muốn xóa
       openDeleteModal(id) {
-        this.$refs.confirmDialog.open(id);
+        this.$refs.confirmDialog.openConfirmDialog(id);
       }
     },
 

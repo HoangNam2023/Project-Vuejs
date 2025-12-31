@@ -5,6 +5,8 @@ function detailView({ template, components, data, computed = {}, methods = {}, m
   return {
     // Template
     template,
+
+    // component
     components,
 
     // data hoàn toàn do hàm con cung cấp

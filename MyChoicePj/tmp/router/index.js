@@ -1,4 +1,4 @@
-import FavouriteMusicContainerView from '../../js/containers/FavouriteMusic.js';
+import FavouriteMusicContainerView from '../../js/containers/favouriteMusic.js';
 import MenuAdminView from '../../js/components/menuAdmin.js';
 import FooterAdminView from '../../js/components/footerAdmin.js';
 import showTitleScreenAdmin from '../../js/components/handle/TitleScreenAdmin.js';

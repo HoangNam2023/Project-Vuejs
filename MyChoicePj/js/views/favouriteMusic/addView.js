@@ -1,18 +1,18 @@
 import BaseAddView from '../base/addView.js';
 import FavouriteMusicAddModel from '../../models/favouriteMusic/addModel.js';
-import MessageBoxView from '../../components/modals/messageBox.js';
 // Lớp view FavouriteMusicAddView
 async function FavouriteMusicAddView () {
   const FavouriteMusicAddTemplate = await fetch('./html/template/FavouriteMusic/add_template.html').then(r => r.text());
-  // Tạo component confirm dialog
-  const messageBox = MessageBoxView({
-    message: "Đăng ký bài hát yêu thích thành công!",
-  });
   return BaseAddView({
     /**
      * @override
      */
     template: FavouriteMusicAddTemplate,
+
+    /**
+     * Data default
+     * @override
+     */
     data() {
       return {
         formAdd: FavouriteMusicAddModel,
@@ -21,7 +21,6 @@ async function FavouriteMusicAddView () {
         messageError: []
       }
     },
-    components: { 'message-box': messageBox },
 
     /**
      * Xử lý methods
@@ -42,11 +41,11 @@ async function FavouriteMusicAddView () {
             body: JSON.stringify(this.formAdd)
           });
           const result = await response.json();
+          this._resetStatusMessage();
           if (result.status === 'success') {
             this.isSuccess = true;
             this.message = "Thêm bài hát thành công!";
             this._resetFormAdd();
-            this.$refs.messageBox.showMessageBox();
           } else {
             this.isError = true;
             this.messageError = result.message;
@@ -68,6 +67,15 @@ async function FavouriteMusicAddView () {
         this.formAdd.release_year = '';
         this.formAdd.created_at = '';
         this.formAdd.updated_at = '';
+      },
+
+      /**
+       * Xử lý reset lại status message
+       * @private
+       */
+      _resetStatusMessage() {
+        this.isSuccess = false;
+        this.isError = false;
       }
     }
   });

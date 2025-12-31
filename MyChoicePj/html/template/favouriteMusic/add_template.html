@@ -63,13 +63,12 @@
   <div v-if="isSuccess" class="alert success">
     {{ message }}
   </div>
-    <!-- Thông báo thành công nếu có -->
-<div v-if="isError" class="alert error">
-  <ul>
-    <li v-for="(msg, index) in messageError" :key="index">
-      {{ msg }}
-    </li>
-  </ul>
-</div>
-  <message-box ref="messageBox"></message-box>
+  <!-- Thông báo lỗi nếu có -->
+  <div v-if="isError" class="alert error">
+    <ul>
+      <li v-for="(msg, index) in messageError" :key="index">
+        {{ msg }}
+      </li>
+    </ul>
+  </div>
 </form>

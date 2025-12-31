@@ -18,6 +18,10 @@ async function FavouriteMusicDetailView() {
      */
     template: FavouriteMusicDetailTemplate,
 
+    /**
+     * Data default
+     * @override
+     */
     data() {
       return {
         model: FavouriteMusicModel,
@@ -26,6 +30,11 @@ async function FavouriteMusicDetailView() {
         isSuccess: false
       }
     },
+
+    /**
+     * Khai báo component
+     * @override
+     */
     components: { 'message-box': messageBox },
 
     /**

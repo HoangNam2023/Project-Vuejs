@@ -2,12 +2,13 @@
 const FavouriteMusicController = Vue.reactive({
   model: null,
   error: null,
+  message: null,
   loading: false,
   apiUrl: window.env.API_URL + "/api/favourite_music_add.php",
   init(model) {
     this.model = model;
   },
-  isSuccess: false,
+  isDeleteSuccess: false,
 
   /**
    * Xử lý thu thập danh sách bài hát
@@ -53,16 +54,16 @@ const FavouriteMusicController = Vue.reactive({
   async deleteSong(songId) {
     try {
       this.loading = true;
-      const res = await fetch(window.env.API_URL + `/api/favourite_music_delete.php?id=${songId}`, {
+      const res = await fetch(window.env.API_URL + `/api/modules/favouriteMusic/delete.php?id=${songId}`, {
         method: "POST"
       });
       const data = await res.json();
       if (!data.success) throw new Error(data.message);
       await this.fetchSongs();
-      this.isSuccess = true;
+      this.isDeleteSuccess = true;
       this.message = "Xóa bài hát thành công!";
       setTimeout(() => {
-        this.isSuccess = false;
+        this.isDeleteSuccess = false;
       }, 3000);
     } catch (e) {
       this.error = e.message;

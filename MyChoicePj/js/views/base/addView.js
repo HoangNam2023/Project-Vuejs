@@ -5,6 +5,8 @@ function baseAddView({ template, components, data, computed = {}, methods = {}, 
   return {
     // Template
     template,
+
+    // component
     components,
 
     // data hoàn toàn do hàm con cung cấp

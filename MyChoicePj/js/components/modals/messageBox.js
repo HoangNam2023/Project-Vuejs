@@ -4,7 +4,13 @@ const MessageBoxViewTemplate = await fetch('./html/template/components/modals/su
  */
 function successDialogView({ message = "" }) {
   return {
+    // Template
     template: MessageBoxViewTemplate,
+
+    /**
+     * Data default
+     * @override
+     */
     data() {
       return {
         showModal: false,
@@ -12,6 +18,9 @@ function successDialogView({ message = "" }) {
       };
     },
 
+    /**
+     * Xử lý methods
+     */
     methods: {
       /**
        * Hiển thị message box
@@ -19,6 +28,7 @@ function successDialogView({ message = "" }) {
       showMessageBox() {
         this.showModal = true;
       },
+
       /**
        * Xác nhận message box
        */

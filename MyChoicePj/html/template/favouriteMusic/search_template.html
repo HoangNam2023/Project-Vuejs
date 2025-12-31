@@ -28,15 +28,18 @@
     </tr>
   </tbody>
 </table>
+<!-- Hiệu ứng loading -->
 <div v-if="getLoading" class="loading-overlay">
   <div class="spinner"></div>
   <p>Đang tải dữ liệu...</p>
 </div>
+<!-- Hiển thị lỗi nếu như lỗi connect -->
 <div v-if="getError" class="error">{{ getError }}</div>
-  <!-- Thông báo thành công nếu có -->
-  <div v-if="getisSuccess" class="alert success">
-    {{ getMessage }}
-  </div>
+<!-- Hiển thị msg xóa thành công nếu có -->
+<div v-if="getIsDeleteSuccess" class="alert success">
+  {{ getMessage }}
+</div>
+<p v-if="!getLoading && getListSong.length">Có {{ getListSong.length }} kết quả tìm kiếm</p>
 <table v-if="!getLoading && getListSong.length">
   <thead>
     <tr>
@@ -61,25 +64,13 @@
     </tr>
   </tbody>
 </table>
-<div v-if="!getLoading && !getListSong.length" class="set-text-c">Chưa có bài hát nào.</div>
-
+<!-- component message thông báo không có kết quả tìm kiếm -->
+<message-no-data-search ref="messageNoDataSearch"></message-no-data-search>
 <!-- Phân trang -->
 <div v-if="!getLoading && getListSong.length" class="pagination">
   <button @click="changePage(page - 1)" :disabled="page === 1">« Trước</button>
   <span>Trang {{ page }} / {{ totalPages }}</span>
   <button @click="changePage(page + 1)" :disabled="page === totalPages">Tiếp »</button>
 </div>
-
-<!-- Modal Xác nhận
-<div v-if="showDeleteModal" class="modal-overlay">
-  <div class="modal-content">
-    <i class="fa fa-trash-o"></i>
-    <h3>Xác nhận xóa</h3>
-    <p>Bạn có chắc muốn xóa bài hát này?</p>
-    <div class="modal-buttons">
-      <button class="confirm-yes-btn" @click="confirmDelete(true)">Đồng ý</button>
-      <button class="confirm-no-btn" @click="confirmDelete(false)">Hủy</button>
-    </div>
-  </div>
-</div> -->
+<!-- component confirm Dialog -->
 <confirm-dialog ref="confirmDialog"></confirm-dialog>
