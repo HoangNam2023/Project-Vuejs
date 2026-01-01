@@ -1,7 +1,9 @@
 <?php
 header("Content-Type: application/json");
+
 require_once "controller.php";
 
-// Đây là API thu thập thông tin FavouriteMusic
+$data = json_decode(file_get_contents("php://input"), true);
 $controller = new FavouriteMusicController();
-responseDataSuccess($controller->index());
+
+response($controller->update($data));

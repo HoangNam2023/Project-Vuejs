@@ -1,4 +1,4 @@
-const ConfirmDialogTemplate = await fetch('./html/template/components/modals/confirm_dialog.html').then(r => r.text());
+const ConfirmDialogTemplate = await fetch('./html/templates/components/modals/confirm_dialog.html').then(r => r.text());
 /**
  * Tạo Confirm Dialog Vue Component giống view.
  */

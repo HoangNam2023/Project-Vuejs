@@ -1,5 +1,4 @@
 <?php
-
 require_once __DIR__ . "/../../config/database.php";
 // require_once __DIR__ . "/../../helpers/validator.php";
 require_once __DIR__ . "/../../helpers/response.php";
@@ -8,12 +7,19 @@ class FavouriteMusicController
 {
   private $db;
 
+  /**
+   * Constructor
+   * Khởi tạo đối tượng và gán kết nối CSDL PDO
+   */
   public function __construct()
   {
     global $pdo;
     $this->db = $pdo;
   }
 
+  /**
+   * Thu thập thông tin FavouriteMusic
+   */
   public function index()
   {
     return $this->db
@@ -21,7 +27,7 @@ class FavouriteMusicController
       ->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  // public function store(array $data)
+  // public function add(array $data)
   // {
   //   $errors = validate([
   //     "title" => ["required", "min:3"]
@@ -37,15 +43,17 @@ class FavouriteMusicController
   //   return ["success" => true];
   // }
 
-  // public function delete($id)
-  // {
-  //   if (!is_numeric($id)) {
-  //     response(["error" => "ID không hợp lệ"], 400);
-  //   }
-
-  //   $stmt = $this->db->prepare("DELETE FROM todos WHERE id = ?");
-  //   $stmt->execute([$id]);
-
-  //   return ["success" => true];
-  // }
+  /**
+   * Xóa thông tin FavouriteMusic
+   * @param {int} $id
+   */
+  public function delete($id)
+  {
+    if (!is_numeric($id)) {
+      responseError("Xóa bài hát không thành công");
+    }
+    $stmt = $this->db->prepare("DELETE FROM songs WHERE id = ?");
+    $stmt->execute([$id]);
+    responseSuccess("Xóa bài hát thành công");
+  }
 }

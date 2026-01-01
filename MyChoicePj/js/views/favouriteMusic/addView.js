@@ -1,8 +1,10 @@
 import BaseAddView from '../base/addView.js';
 import FavouriteMusicAddModel from '../../models/favouriteMusic/addModel.js';
+import messageErrorSuccessView from '../../components/messageErrorSuccess.js';
 // Lớp view FavouriteMusicAddView
 async function FavouriteMusicAddView () {
-  const FavouriteMusicAddTemplate = await fetch('./html/template/FavouriteMusic/add_template.html').then(r => r.text());
+  const FavouriteMusicAddTemplate = await fetch('./html/templates/FavouriteMusic/add_template.html').then(r => r.text());
+  const messageErrorSuccess = messageErrorSuccessView();
   return BaseAddView({
     /**
      * @override
@@ -20,6 +22,14 @@ async function FavouriteMusicAddView () {
         isError: false,
         messageError: []
       }
+    },
+
+    /**
+     * Khai báo component
+     * @override
+     */
+    components: {
+      'message-error-success': messageErrorSuccess
     },
 
     /**
@@ -41,14 +51,12 @@ async function FavouriteMusicAddView () {
             body: JSON.stringify(this.formAdd)
           });
           const result = await response.json();
-          this._resetStatusMessage();
           if (result.status === 'success') {
-            this.isSuccess = true;
-            this.message = "Thêm bài hát thành công!";
+            this.$refs.messageErrorSuccess.showSuccessMessage("Thêm bài hát thành công!");
             this._resetFormAdd();
           } else {
             this.isError = true;
-            this.messageError = result.message;
+            this.$refs.messageErrorSuccess.showErrorMessage(result.message);
           }
         } catch (error) {
           console.error(error);

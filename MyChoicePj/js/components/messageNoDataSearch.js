@@ -1,4 +1,4 @@
-const MessageNoDataSearchView = await fetch('./html/template/components/message_no_data_search.html').then(r => r.text());
+const MessageNoDataSearchView = await fetch('./html/templates/components/message_no_data_search.html').then(r => r.text());
 /**
  * Tạo message thông báo không có data tìm kiếm.
  * @param {Object} searchController
@@ -20,6 +20,10 @@ function messageNoDataSearchView({ searchController, searchModel }) {
       };
     },
 
+    /**
+     * Xử lý computed
+     * @override
+     */
     computed: {
       /**
        * Trạng thái loading
@@ -36,7 +40,6 @@ function messageNoDataSearchView({ searchController, searchModel }) {
       },
     },
   };
-
 }
 
 export default messageNoDataSearchView;

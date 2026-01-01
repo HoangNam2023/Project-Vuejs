@@ -39,7 +39,7 @@
 <div v-if="getIsDeleteSuccess" class="alert success">
   {{ getMessage }}
 </div>
-<p v-if="!getLoading && getListSong.length">Có {{ getListSong.length }} kết quả tìm kiếm</p>
+<p style="font-size:16px; font-weight: bold;" v-if="!getLoading && getListSong.length">Có {{ getListSong.length }} kết quả tìm kiếm</p>
 <table v-if="!getLoading && getListSong.length">
   <thead>
     <tr>

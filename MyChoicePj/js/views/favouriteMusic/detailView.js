@@ -7,7 +7,7 @@ import MessageBoxView from '../../components/modals/messageBox.js';
 async function FavouriteMusicDetailView() {
   // Nạp model vào Controller
   FavouriteMusicController?.init?.(FavouriteMusicModel);
-  const FavouriteMusicDetailTemplate = await fetch('./html/template/FavouriteMusic/detail_template.html').then(r => r.text());
+  const FavouriteMusicDetailTemplate = await fetch('./html/templates/FavouriteMusic/detail_template.html').then(r => r.text());
   // Tạo component confirm dialog
   const messageBox = MessageBoxView({
     message: "Cập nhật bài hát yêu thích thành công!",

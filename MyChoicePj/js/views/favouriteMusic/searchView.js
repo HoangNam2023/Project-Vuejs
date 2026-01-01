@@ -6,7 +6,7 @@ import messageNoDataSearchView from '../../components/messageNoDataSearch.js';
 
 // Lớp view FavouriteMusicSearch
 async function FavouriteMusicSearchView() {
-  const FavouriteMusicSearchTemplate = await fetch('./html/template/FavouriteMusic/search_template.html').then(r => r.text());
+  const FavouriteMusicSearchTemplate = await fetch('./html/templates/FavouriteMusic/search_template.html').then(r => r.text());
   FavouriteMusicController?.init?.(FavouriteMusicModel);
   // Tạo component confirm dialog
   const confirmDialog = confirmDialogView({
