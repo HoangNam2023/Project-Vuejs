@@ -1,0 +1,5 @@
+<div v-if="!getLoading && getListItem.length" class="pagination">
+  <button @click="changePage(page - 1)" :disabled="page === 1">« Trước</button>
+  <span>Trang {{ page }} / {{ totalPages }}</span>
+  <button @click="changePage(page + 1)" :disabled="page === totalPages">Tiếp »</button>
+</div>

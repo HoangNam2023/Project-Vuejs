@@ -66,11 +66,9 @@
 </table>
 <!-- component message thông báo không có kết quả tìm kiếm -->
 <message-no-data-search ref="messageNoDataSearch"></message-no-data-search>
-<!-- Phân trang -->
-<div v-if="!getLoading && getListSong.length" class="pagination">
-  <button @click="changePage(page - 1)" :disabled="page === 1">« Trước</button>
-  <span>Trang {{ page }} / {{ totalPages }}</span>
-  <button @click="changePage(page + 1)" :disabled="page === totalPages">Tiếp »</button>
-</div>
+<!-- Component phân trang -->
+<pagination
+  @update:paginatedItem="paginatedSongs = $event">
+</pagination>
 <!-- component confirm Dialog -->
 <confirm-dialog ref="confirmDialog"></confirm-dialog>

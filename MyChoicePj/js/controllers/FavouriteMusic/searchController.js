@@ -62,9 +62,6 @@ const FavouriteMusicController = Vue.reactive({
       await this.fetchSongs();
       this.isDeleteSuccess = true;
       this.message = "Xóa bài hát thành công!";
-      setTimeout(() => {
-        this.isDeleteSuccess = false;
-      }, 3000);
     } catch (e) {
       this.error = e.message;
     } finally {

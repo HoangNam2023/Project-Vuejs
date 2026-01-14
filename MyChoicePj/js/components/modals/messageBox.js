@@ -1,4 +1,4 @@
-const MessageBoxViewTemplate = await fetch('./html/template/components/modals/success_dialog.html').then(r => r.text());
+const MessageBoxViewTemplate = await fetch('./html/templates/components/modals/success_dialog.html').then(r => r.text());
 /**
  * Tạo message box.
  */

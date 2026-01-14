@@ -191,6 +191,27 @@ button.update-btn:active {
   transform: scale(0.98);
 }
 
+/** Button back **/
+button.back-btn {
+  background-color: #6c757d;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  margin-right: 10px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+button.back-btn:hover {
+  background-color: #5a6268;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+button.back-btn:active {
+  transform: scale(0.98);
+}
+
 /** Button thêm mới **/
 .add-btn {
   background-color: #007bff;

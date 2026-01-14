@@ -39,11 +39,10 @@ async function FavouriteMusicAddView () {
     methods: {
       /**
        * Xử lý thêm mới
-       * @private
        */
       async addFavouriteMusic() {
         try {
-          const response = await fetch('http://localhost/Project-Vuejs/MyChoicePj/api/favourite_music_add.php', {
+          const response = await fetch('http://localhost/Project-Vuejs/MyChoicePj/api/modules/favouriteMusic/add.php', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -51,7 +50,7 @@ async function FavouriteMusicAddView () {
             body: JSON.stringify(this.formAdd)
           });
           const result = await response.json();
-          if (result.status === 'success') {
+          if (result.success) {
             this.$refs.messageErrorSuccess.showSuccessMessage("Thêm bài hát thành công!");
             this._resetFormAdd();
           } else {
@@ -62,6 +61,13 @@ async function FavouriteMusicAddView () {
           console.error(error);
           alert('Có lỗi xảy ra khi gửi dữ liệu!');
         }
+      },
+
+      /**
+       * Xử lý trở về màn hình danh sách
+       */
+      handleClickBack() {
+        window.location.href = '#/favourite_music';
       },
 
       /**

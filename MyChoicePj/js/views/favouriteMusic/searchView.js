@@ -3,6 +3,7 @@ import FavouriteMusicModel from '../../models/favouriteMusic/searchModel.js';
 import FavouriteMusicController from '../../controllers/FavouriteMusic/searchController.js';
 import confirmDialogView from '../../components/modals/confirmDialog.js';
 import messageNoDataSearchView from '../../components/messageNoDataSearch.js';
+import paginationView from '../../components/pagination.js';
 
 // Lớp view FavouriteMusicSearch
 async function FavouriteMusicSearchView() {
@@ -20,6 +21,12 @@ async function FavouriteMusicSearchView() {
   const messageNoDataSearch = messageNoDataSearchView({
     searchController: FavouriteMusicController,
     searchModel: FavouriteMusicModel
+  });
+  // Tạo component phân trang cho màn search
+  const pagination = paginationView({
+    searchController: FavouriteMusicController,
+    searchModel: FavouriteMusicModel,
+    modelKey: 'songs'
   });
   // Kế thừa BaseSearchView
   return BaseSearchView({
@@ -39,7 +46,8 @@ async function FavouriteMusicSearchView() {
           album: ''
         },
         showDeleteModal: false,
-        deleteId: null
+        deleteId: null,
+        paginatedSongs: []
       };
     },
 
@@ -49,7 +57,8 @@ async function FavouriteMusicSearchView() {
      */
     components: {
       'confirm-dialog': confirmDialog,
-      'message-no-data-search': messageNoDataSearch 
+      'message-no-data-search': messageNoDataSearch,
+      'pagination': pagination
     },
 
     /**
@@ -92,21 +101,12 @@ async function FavouriteMusicSearchView() {
         return this.controller.isDeleteSuccess;
       },
 
-      /**
-       * Tính tổng số trang dựa trên tổng số bài hát
-       */
-      totalPages() {
-        return Math.ceil(this.model.songs.length / this.pageSize);
-      },
-
-      /**
-       * Lấy danh sách bài hát cho trang hiện tại
-       */
-      paginatedSongs() {
-        const start = (this.page - 1) * this.pageSize;
-        const end = this.page * this.pageSize;
-        return this.model.songs.slice(start, end);
-      }
+      // /**
+      //  * Lấy danh sách bài hát cho trang hiện tại
+      //  */
+      // paginatedSongs() {
+      //   this.model.songs = this.$refs.pagination.paginatedSongs();
+      // }
     },
 
     /**

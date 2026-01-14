@@ -34,11 +34,11 @@ function responseSuccess($success_msg, int $status = 200)
  * @param $error_msg
  * @param $status
  */
-function responseError($error_msg, int $status = 200)
+function responseError($error_msg, int $status = 400)
 {
   http_response_code($status);
   echo json_encode([
-    'error'   => true,
+    'success' => false,
     "message" => $error_msg
   ]);
   exit;
