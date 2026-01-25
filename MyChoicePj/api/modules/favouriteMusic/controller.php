@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . "/../../config/database.php";
-require_once __DIR__ . "/../../helpers/validator.php";
+require_once __DIR__ . "/../../validates/favouriteMusic.php";
 require_once __DIR__ . "/../../helpers/response.php";
 
 class FavouriteMusicController
@@ -35,19 +35,16 @@ public function add(array $data)
     $release_year = $data['release_year'] ?? null;
     $created_at   = $data['created_at'] ?? date("Y-m-d H:i:s");
     $updated_at   = $data['updated_at'] ?? date("Y-m-d H:i:s");
-
-        $errors = validate([
-      "title" => ["required", "min:3"]
-    ], $data);
-
-    if ($errors) {
-      responseError($errors);
+    $errors = [];
+    $errors = validateAddFavouriteMusic($data);
+    if (!empty($errors)) {
+         responseError($errors);
     }
 
-    if (empty($title)) {
-        echo json_encode(['status' => false, 'message' => 'Title không được để trống']);
-        exit;
-    }
+    // if (empty($title)) {
+    //     echo json_encode(['status' => false, 'message' => 'Title không được để trống']);
+    //     exit;
+    // }
 
     $sql = "INSERT INTO songs 
             (title, artist, album, release_year, created_at, updated_at)
@@ -78,6 +75,50 @@ public function add(array $data)
     }
 }
 
+public function update(array $data)
+{
+    $title        = $data['title'] ?? '';
+    $artist       = $data['artist'] ?? '';
+    $album        = $data['album'] ?? '';
+    $release_year = $data['release_year'] ?? null;
+    $created_at   = $data['created_at'] ?? date("Y-m-d H:i:s");
+    $updated_at   = $data['updated_at'] ?? date("Y-m-d H:i:s");
+    $id        = $data['id'] ?? '';
+    $errors = [];
+    $errors = validateUpdateFavouriteMusic($data);
+    if (!empty($errors)) {
+         responseError($errors);
+    }
+
+    $sql = "Update songs set title = :title , artist = :artist
+, album = :album , release_year = :release_year , created_at = :created_at , updated_at = :updated_at
+where id = :id";
+
+    try {
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([
+            ':title' => $title,
+            ':artist' => $artist,
+            ':album' => $album,
+            ':release_year' => $release_year,
+            ':created_at' => $created_at,
+            ':updated_at' => $updated_at,
+            ':id' =>$id
+        ]);
+
+        echo json_encode([
+            'success' => true,
+            'message' => 'Cập nhật bài hát thành công',
+        ]);
+        exit; // quan trọng: kết thúc script
+    } catch (PDOException $e) {
+        echo json_encode([
+            'status' => false,
+            'message' => 'Lỗi DB: ' . $e->getMessage()
+        ]);
+        exit;
+    }
+}
 
 
 
