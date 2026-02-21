@@ -4,7 +4,7 @@ const FavouriteMusicUpdateModel = Vue.reactive({
     title: '',
     artist: '',
     album: '',
-    release_year: '',
+    release_at: '',
     created_at: '',
     updated_at: ''
 });

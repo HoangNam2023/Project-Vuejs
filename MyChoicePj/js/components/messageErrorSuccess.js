@@ -30,10 +30,16 @@ function messageErrorSuccessView() {
        * Hiển thị message thành công
        * @param {string} msgSuccess 
        */
-      showSuccessMessage(msgSuccess) {
+      async showSuccessMessage(msgSuccess) {
         this.isSuccess = true;
         this.isError = false;
         this.msgSuccess = msgSuccess;
+        this.$nextTick(() => {
+          window.scrollTo({
+            top: document.documentElement.scrollHeight,
+            behavior: 'smooth'
+          });
+        });
       },
 
       /**
@@ -44,6 +50,12 @@ function messageErrorSuccessView() {
         this.isSuccess = false;
         this.isError = true;
         this.msgError = msgError;
+        this.$nextTick(() => {
+          window.scrollTo({
+            top: document.documentElement.scrollHeight,
+            behavior: 'smooth'
+          });
+        });
       },
     },
   };

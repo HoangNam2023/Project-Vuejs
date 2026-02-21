@@ -23,7 +23,7 @@ class FavouriteMusicController
   public function index()
   {
     return $this->db
-      ->query("SELECT * FROM songs")
+      ->query("SELECT * FROM songs order by id desc")
       ->fetchAll(PDO::FETCH_ASSOC);
   }
 
@@ -32,7 +32,7 @@ public function add(array $data)
     $title        = $data['title'] ?? '';
     $artist       = $data['artist'] ?? '';
     $album        = $data['album'] ?? '';
-    $release_year = $data['release_year'] ?? null;
+    $release_at = $data['release_at'] ?? null;
     $created_at   = $data['created_at'] ?? date("Y-m-d H:i:s");
     $updated_at   = $data['updated_at'] ?? date("Y-m-d H:i:s");
     $errors = [];
@@ -47,8 +47,8 @@ public function add(array $data)
     // }
 
     $sql = "INSERT INTO songs 
-            (title, artist, album, release_year, created_at, updated_at)
-            VALUES (:title, :artist, :album, :release_year, :created_at, :updated_at)";
+            (title, artist, album, release_at, created_at, updated_at)
+            VALUES (:title, :artist, :album, :release_at, :created_at, :updated_at)";
 
     try {
         $stmt = $this->db->prepare($sql);
@@ -56,7 +56,7 @@ public function add(array $data)
             ':title' => $title,
             ':artist' => $artist,
             ':album' => $album,
-            ':release_year' => $release_year,
+            ':release_at' => $release_at,
             ':created_at' => $created_at,
             ':updated_at' => $updated_at
         ]);
@@ -80,7 +80,7 @@ public function update(array $data)
     $title        = $data['title'] ?? '';
     $artist       = $data['artist'] ?? '';
     $album        = $data['album'] ?? '';
-    $release_year = $data['release_year'] ?? null;
+    $release_at = $data['release_at'] ?? null;
     $created_at   = $data['created_at'] ?? date("Y-m-d H:i:s");
     $updated_at   = $data['updated_at'] ?? date("Y-m-d H:i:s");
     $id        = $data['id'] ?? '';
@@ -91,7 +91,7 @@ public function update(array $data)
     }
 
     $sql = "Update songs set title = :title , artist = :artist
-, album = :album , release_year = :release_year , created_at = :created_at , updated_at = :updated_at
+, album = :album , release_at = :release_at , created_at = :created_at , updated_at = :updated_at
 where id = :id";
 
     try {
@@ -100,7 +100,7 @@ where id = :id";
             ':title' => $title,
             ':artist' => $artist,
             ':album' => $album,
-            ':release_year' => $release_year,
+            ':release_at' => $release_at,
             ':created_at' => $created_at,
             ':updated_at' => $updated_at,
             ':id' =>$id

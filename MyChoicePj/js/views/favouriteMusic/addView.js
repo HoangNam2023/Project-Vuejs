@@ -50,12 +50,14 @@ async function FavouriteMusicAddView () {
             body: JSON.stringify(this.formAdd)
           });
           const result = await response.json();
-          if (result.success) {
-            this.$refs.messageErrorSuccess.showSuccessMessage("Thêm bài hát thành công!");
-            this._resetFormAdd();
-          } else {
-            this.isError = true;
-            this.$refs.messageErrorSuccess.showErrorMessage(result.message);
+          if (result) {
+            if (result.success) {
+              this.$refs.messageErrorSuccess.showSuccessMessage("Thêm bài hát thành công!");
+              this._resetFormAdd();
+            } else {
+              this.isError = true;
+              this.$refs.messageErrorSuccess.showErrorMessage(result.message);
+            }
           }
         } catch (error) {
           console.error(error);
@@ -78,9 +80,7 @@ async function FavouriteMusicAddView () {
         this.formAdd.title = '';
         this.formAdd.artist = '';
         this.formAdd.album = '';
-        this.formAdd.release_year = '';
-        this.formAdd.created_at = '';
-        this.formAdd.updated_at = '';
+        this.formAdd.release_at = '';
       },
 
       /**
@@ -91,7 +91,14 @@ async function FavouriteMusicAddView () {
         this.isSuccess = false;
         this.isError = false;
       }
-    }
+    },
+
+    /**
+     * Xử lý mounted
+     */
+    mounted() {
+      this._resetFormAdd();
+    },
   });
 }
 

@@ -13,7 +13,7 @@ function validateAddFavouriteMusic(array $data): array
 
     $title_item_mapping = [
         "title"  => "Tên bài hát",
-        "artist" => "Tên nhạc sĩ"
+        "artist" => "Nhạc sĩ"
     ];
 
     return validate($rules, $data, $title_item_mapping);
@@ -27,12 +27,12 @@ function validateUpdateFavouriteMusic(array $data): array
 {
     $rules = [
         "title"  => ["required", "min:3"],
-        "artist" => ["required", "min:3"]
+        "artist" => ["required", "min:3"],
     ];
 
     $title_item_mapping = [
         "title"  => "Tên bài hát",
-        "artist" => "Tên nhạc sĩ"
+        "artist" => "Tên nhạc sĩ",
     ];
 
     return validate($rules, $data, $title_item_mapping);

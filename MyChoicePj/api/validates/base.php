@@ -15,6 +15,12 @@ function validate(array $rules, array $data, array $title_item_mapping)
           $errors[] = "$label tối thiểu $min ký tự";
         }
       }
+      if ($rule === "year" && !empty(trim($data[$field] ?? ""))) {
+          $currentYear = date('Y');
+          if (!preg_match('/^\d{4}$/', $data[$field]) ||$data[$field] < 1900 || $data[$field] > $currentYear) {
+              $errors[] = "$label phải là năm hợp lệ";
+          }
+      }
     }
   }
 
