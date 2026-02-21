@@ -1,0 +1,93 @@
+// Lớp controller FavouriteMusic
+const FavouriteMusicController = Vue.reactive({
+  model: null,
+  error: null,
+  message: null,
+  loading: false,
+  apiUrl: window.env.API_URL + "/api/favourite_music_add.php",
+  init(model) {
+    this.model = model;
+  },
+  isDeleteSuccess: false,
+
+  /**
+   * Xử lý thu thập danh sách bài hát
+   */
+  async fetchSongs() {
+    this.loading = true;
+    this.error = null;
+    try {
+      const response = await fetch(window.env.API_URL + "api/modules/favouriteMusic/index.php");
+      const data = await response.json();
+      if (data.success) this.model.songs = data.data;
+      else this.error = 'Không thể tải danh sách bài hát.';
+    } catch {
+      this.error = 'Lỗi khi kết nối server.';
+    } finally {
+      this.loading = false;
+    }
+  },
+
+
+  /**
+   * Xử lý thu thập danh sách bài hát theo id
+   */
+  async fetchSongsById(id) {
+    this.loading = true;
+    this.error = null;
+    try {
+      const response = await fetch(window.env.API_URL + "api/favourite_music_detail.php?id=" + id);
+      const data = await response.json();
+      if (data.success) this.model.songs = [data.data];
+      else this.error = 'Không thể tải bài hát.';
+    } catch {
+      this.error = 'Lỗi khi kết nối server.';
+    } finally {
+      this.loading = false;
+    }
+  },
+
+  /**
+   * Xử lý xóa bài hát
+   * @param {int} songId 
+   */
+  async deleteSong(songId) {
+    try {
+      this.loading = true;
+      const res = await fetch(window.env.API_URL + `/api/modules/favouriteMusic/delete.php?id=${songId}`, {
+        method: "POST"
+      });
+      const data = await res.json();
+      if (!data.success) throw new Error(data.message);
+      await this.fetchSongs();
+      this.isDeleteSuccess = true;
+      this.message = "Xóa bài hát thành công!";
+    } catch (e) {
+      this.error = e.message;
+    } finally {
+      this.loading = false;
+    }
+  },
+
+  /**
+   * Xử lý search bài hát
+   * @param {array} filters 
+   */
+  async searchSongs(filters = {}) {
+    try {
+      this.loading = true;
+      this.error = null;
+      const params = new URLSearchParams(filters).toString();
+      const res = await fetch(window.env.API_URL + `/api/favourite_music_search_condition.php?${params}`);
+      const data = await res.json();
+      this.model.songs = data;
+    } catch (err) {
+      this.error = "Lỗi khi tải dữ liệu!";
+    } finally {
+      this.loading = false;
+    }
+  }
+}
+)
+
+export default FavouriteMusicController;
