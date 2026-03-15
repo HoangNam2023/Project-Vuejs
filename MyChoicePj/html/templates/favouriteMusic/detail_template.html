@@ -35,28 +35,12 @@
           <strong>Ngày phát hành</strong>
         </td>
         <td>
-          <input type="text" v-model="formUpdate.release_year" name="release_year">
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <strong>Ngày tạo</strong>
-        </td>
-        <td>
-          <input type="datetime-local" v-model="formUpdate.created_at" name="created_at">
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <strong>Ngày cập nhật</strong>
-        </td>
-        <td>
-          <input type="datetime-local" v-model="formUpdate.updated_at" name="updated_at">
+          <input type="datetime-local" v-model="formUpdate.release_at" name="release_at" value="">
         </td>
       </tr>
       <tr>
         <td colspan="2" class="set-text-c">
-          <button class="back-btn" type="submit" @click="handleClickBack">
+          <button class="back-btn" type="button" @click="handleClickBack">
             <i class="fa fa-arrow-left"></i> Trở về
           </button>
           <button class="update-btn" type="submit">
@@ -67,11 +51,6 @@
     </tbody>
   </table>
 
-  <!-- Thông báo thành công nếu có -->
-   <transition name="fade">
-    <div v-if="isSuccess" class="alert success">
-      {{ message }}
-    </div>
-  </transition>
-  <message-box ref="messageBox"></message-box>
+  <!-- component confirm Dialog -->
+  <message-error-success ref="messageErrorSuccess"></message-error-success>
 </form>

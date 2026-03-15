@@ -3,7 +3,7 @@ const FavouriteMusicDetailController = Vue.reactive({
   model: null,
   error: null,
   loading: false,
-  apiDetail: window.env.API_URL + "/api/favourite_music_detail.php?id=",
+  apiDetail: window.env.API_URL + "/api/modules/favouriteMusic/detail.php?id=",
   init(model) {
     this.model = model;
   },

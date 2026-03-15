@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Phản hồi Data thành công
  * @param $data

@@ -49,7 +49,7 @@ $id           = $data['id'] ?? '';
 $title        = $data['title'] ?? '';
 $artist       = $data['artist'] ?? '';
 $album        = $data['album'] ?? '';
-$release_year = $data['release_year'] ?? '';
+$release_at = $data['release_at'] ?? '';
 $created_at   = $data['created_at'] ?? date("Y-m-d H:i:s");
 $updated_at   = $data['updated_at'] ?? date("Y-m-d H:i:s");
 
@@ -68,7 +68,7 @@ if (empty($title) || empty($artist)) {
 // 💾 Thực hiện thêm vào database
 // ------------------------
 $stmt = $conn->prepare("Update songs set title = ? , artist = ?
-, album = ? , release_year = ? , created_at = ? , updated_at = ?
+, album = ? , release_at = ? , created_at = ? , updated_at = ?
 where id = ?");
 
 if (!$stmt) {
@@ -79,7 +79,7 @@ if (!$stmt) {
     exit;
 }
 
-$stmt->bind_param("sssssss", $title, $artist, $album, $release_year, $created_at, $updated_at, $id);
+$stmt->bind_param("sssssss", $title, $artist, $album, $release_at, $created_at, $updated_at, $id);
 
 if ($stmt->execute()) {
     echo json_encode([

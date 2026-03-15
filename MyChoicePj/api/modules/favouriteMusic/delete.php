@@ -1,7 +1,8 @@
 <?php
-header("Content-Type: application/json");
-require_once "controller.php";
+header('Content-Type: application/json');
 
-// Đây là API xóa thông tin FavouriteMusic
-$controller = new FavouriteMusicController();
-$controller->delete($_GET["id"] ?? null);
+require_once __DIR__ . '/../../repositories/favouriteMusic/deleteFavouriteMusic.php';
+
+// Xử lý xóa thông tin FavouriteMusic
+$delete_action = new DeleteFavouriteMusic();
+$delete_action->delete();

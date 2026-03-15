@@ -1,23 +1,9 @@
 <?php
 header('Content-Type: application/json');
 
-require_once 'controller.php';
+require_once __DIR__ . '/../../repositories/favouriteMusic/addFavouriteMusic.php';
 
-$controller = new FavouriteMusicController();
-
-// Đọc JSON body
+// Xử lý thêm mới FavouriteMusic
+$add_action = new AddFavouriteMusic();
 $data = json_decode(file_get_contents("php://input"), true);
-
-// Debug: bỏ comment nếu cần
-// var_dump($data); die;
-
-if (!is_array($data)) {
-    echo json_encode([
-        'status' => false,
-        'message' => 'Dữ liệu gửi lên không hợp lệ hoặc rỗng'
-    ]);
-    exit;
-}
-
-$controller->add($data); // sẽ echo response JSON bên trong add()
-
+$add_action->add($data);

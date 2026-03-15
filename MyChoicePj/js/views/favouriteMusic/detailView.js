@@ -2,8 +2,10 @@ import BaseDetailView from '../base/detailView.js';
 import FavouriteMusicUpdateModel from '../../models/favouriteMusic/updateModel.js';
 import FavouriteMusicController from '../../controllers/FavouriteMusic/detailController.js';
 import FavouriteMusicModel from '../../models/favouriteMusic/detailModel.js';
+import messageErrorSuccessView from '../../components/messageErrorSuccess.js';
 // Lớp view FavouriteMusicDetailView
 async function FavouriteMusicDetailView() {
+  const messageErrorSuccess = messageErrorSuccessView();
   // Nạp model vào Controller
   FavouriteMusicController?.init?.(FavouriteMusicModel);
   const FavouriteMusicDetailTemplate = await fetch('./html/templates/FavouriteMusic/detail_template.html').then(r => r.text());
@@ -14,6 +16,14 @@ async function FavouriteMusicDetailView() {
      */
     template: FavouriteMusicDetailTemplate,
 
+        /**
+     * Khai báo component
+     * @override
+     */
+    components: {
+      'message-error-success': messageErrorSuccess
+    },
+
     /**
      * Data default
      * @override
@@ -23,9 +33,13 @@ async function FavouriteMusicDetailView() {
         model: FavouriteMusicModel,
         controller: FavouriteMusicController,
         formUpdate: { ...FavouriteMusicUpdateModel },
-        isSuccess: false
+        isSuccess: false,
+        isError: false,
+        messageError: []
       }
     },
+
+
 
     /**
      * Xử lý computed
@@ -51,7 +65,7 @@ async function FavouriteMusicDetailView() {
        */
       async updateFavouriteMusic() {
         try {
-          const response = await fetch('http://localhost/Project-Vuejs/MyChoicePj/api/favourite_music_update.php', {
+          const response = await fetch('http://localhost/Project-Vuejs/MyChoicePj/api/modules/favouriteMusic/update.php', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -59,11 +73,15 @@ async function FavouriteMusicDetailView() {
             body: JSON.stringify(this.formUpdate)
           });
           const result = await response.json();
-          if (result.status === 'success') {
-            this.isSuccess = true;
-            this.message = "Cập nhật bài hát thành công!";
-          } else {
-            alert(result.message);
+          if (result) { 
+            if (result.success) {
+              // this.isSuccess = true;
+              // this.message = "Cập nhật bài hát thành công!";
+              this.$refs.messageErrorSuccess.showSuccessMessage("Cập nhật bài hát thành công!");
+            } else {
+              this.$refs.messageErrorSuccess.showErrorMessage(result.message);
+              this.isError = true;
+            }
           }
         } catch (error) {
           console.error(error);
@@ -77,6 +95,14 @@ async function FavouriteMusicDetailView() {
       handleClickBack() {
         window.location.href = '#/favourite_music';
       },
+            /**
+       * Xử lý reset lại status message
+       * @private
+       */
+      _resetStatusMessage() {
+        this.isSuccess = false;
+        this.isError = false;
+      }
     },
 
     /**

@@ -49,7 +49,7 @@ $id           = $data['id'] ?? '';
 $title        = $data['title'] ?? '';
 $artist       = $data['artist'] ?? '';
 $album        = $data['album'] ?? '';
-$release_year = $data['release_year'] ?? '';
+$release_at = $data['release_at'] ?? '';
 $created_at   = $data['created_at'] ?? date("Y-m-d H:i:s");
 $updated_at   = $data['updated_at'] ?? date("Y-m-d H:i:s");
 
@@ -77,7 +77,7 @@ if (!empty($errors)) {
 // 💾 Thực hiện thêm vào database
 // ------------------------
 $stmt = $conn->prepare("INSERT INTO songs 
-    (id, title, artist, album, release_year, created_at, updated_at) 
+    (id, title, artist, album, release_at, created_at, updated_at) 
     VALUES (?, ?, ?, ?, ?, ?, ?)");
 
 if (!$stmt) {
@@ -88,7 +88,7 @@ if (!$stmt) {
     exit;
 }
 
-$stmt->bind_param("sssssss", $id, $title, $artist, $album, $release_year, $created_at, $updated_at);
+$stmt->bind_param("sssssss", $id, $title, $artist, $album, $release_at, $created_at, $updated_at);
 
 if ($stmt->execute()) {
     echo json_encode([

@@ -20,7 +20,6 @@ const FavouriteMusicController = Vue.reactive({
       const response = await fetch(window.env.API_URL + "api/modules/favouriteMusic/index.php");
       const data = await response.json();
       if (data.success) this.model.songs = data.data;
-      else this.error = 'Không thể tải danh sách bài hát.';
     } catch {
       this.error = 'Lỗi khi kết nối server.';
     } finally {
@@ -81,6 +80,25 @@ const FavouriteMusicController = Vue.reactive({
       const res = await fetch(window.env.API_URL + `/api/favourite_music_search_condition.php?${params}`);
       const data = await res.json();
       this.model.songs = data;
+    } catch (err) {
+      this.error = "Lỗi khi tải dữ liệu!";
+    } finally {
+      this.loading = false;
+    }
+  },
+  /**
+ * Xử lý search bài hát
+ * @param {array} filters 
+ */
+  async printPDF(filters = {}) {
+    try {
+      this.loading = true;
+      this.error = null;
+      const params = new URLSearchParams(filters).toString();
+      const res = await fetch(window.env.API_URL + `/api/modules/favouriteMusic/printPDF.php?${params}`);
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      window.open(url);
     } catch (err) {
       this.error = "Lỗi khi tải dữ liệu!";
     } finally {
