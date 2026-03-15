@@ -8,9 +8,9 @@ const { createRouter, createWebHashHistory, RouterView } = VueRouter;
 
 // Đây là route của các màn hình
 const routes = [
-  { path:'/favourite_music', component:FavouriteMusicContainerView.FavouriteMusicSearchView },
-  { path:'/favourite_music/add', component:FavouriteMusicContainerView.FavouriteMusicAddView },
-    { path:'/favourite_music/detail/:id', component:FavouriteMusicContainerView.FavouriteMusicDetailView }
+  { path: '/favourite_music', component: FavouriteMusicContainerView.FavouriteMusicSearchView },
+  { path: '/favourite_music/add', component: FavouriteMusicContainerView.FavouriteMusicAddView },
+  { path: '/favourite_music/detail/:id', component: FavouriteMusicContainerView.FavouriteMusicDetailView }
 ]
 
 // MenuAdmin view

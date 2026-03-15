@@ -3,8 +3,8 @@ require_once __DIR__ . "/../../config/database.php";
 require_once __DIR__ . "/../../validates/favouriteMusic.php";
 require_once __DIR__ . "/../../helpers/response.php";
 
-// Repository xử lý thu thập chi tiết danh sách yêu thích.
-class DetailFavouriteMusic
+// Repository xóa thông tin FavouriteMusic
+class DeleteFavouriteMusic
 {
     private $db;
 
@@ -19,21 +19,22 @@ class DetailFavouriteMusic
     }
 
     /**
-     * Thu thập chi tiết thông tin FavouriteMusic
+     * Xóa thông tin FavouriteMusic
      */
-    public function detail()
+    public function delete()
     {
-        $id = isset($_GET['id']) ? $_GET['id'] : "";
-        $sql = "SELECT * FROM songs WHERE id = ?";
         try {
+            $id = isset($_GET['id']) ? $_GET['id'] : "";
+            if (!is_numeric($id)) {
+                responseError("Mã id bài hát không hợp lệ");
+            }
+            $sql = "DELETE FROM songs WHERE id = ?";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([$id]);
-            $song = $stmt->fetch(PDO::FETCH_ASSOC);
-            if (!$song) {
-                responseError('Không tìm thấy bái hát');
-            } else {
-                responseDataSuccess($song);
+            if ($stmt->rowCount() == 0) {
+                responseError("Bài hát không tồn tại");
             }
+            responseSuccess("Xóa bài hát thành công");
         } catch (PDOException $e) {
             responseError($e->getMessage());
         }

@@ -39,7 +39,12 @@
 <div v-if="getIsDeleteSuccess" class="alert success">
   {{ getMessage }}
 </div>
-<p style="font-size:16px; font-weight: bold;" v-if="!getLoading && getListSong.length">Có {{ getListSong.length }} kết quả tìm kiếm</p>
+<div class="set-disp-flex set-jus-between">
+  <p style="font-size:16px; font-weight: bold;" v-if="!getLoading && getListSong.length">Có {{ getListSong.length }} kết quả tìm kiếm</p>
+  <button class="update-btn set-mr-10px" v-if="!getLoading && getListSong.length" @click.prevent="searchPrintPDFFavouriteMusic" type="submit">
+    <i class="fa fa-file-pdf-o"></i> Xuất PDF
+  </button>
+</div>
 <table v-if="!getLoading && getListSong.length">
   <thead>
     <tr>

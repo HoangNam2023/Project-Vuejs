@@ -327,6 +327,12 @@ button.back-btn:active {
 .admin-ui #main #main-right .set-mr-43px {
   margin-right: 43px;
 }
+.admin-ui #main #main-right .set-disp-flex {
+  display: flex;
+}
+.admin-ui #main #main-right .set-jus-between {
+  justify-content: space-between;
+}
 input[type="text"],
 input[type="datetime-local"] {
   width: 40%;

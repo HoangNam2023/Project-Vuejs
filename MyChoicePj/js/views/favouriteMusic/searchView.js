@@ -139,19 +139,32 @@ async function FavouriteMusicSearchView() {
       },
 
       /**
+       * In PDF FavouriteMusic
+       */
+      searchPrintPDFFavouriteMusic() {
+        this.page = 1;
+        this.controller.printPDF({
+          title: this.formSearch.title,
+          artist: this.formSearch.artist,
+          album: this.formSearch.album
+        });
+      },
+
+      /**
        * Clear thông tin form search
        */
       clearFormSearch() {
         this.formSearch.title = '',
-          this.formSearch.artist = '',
-          this.formSearch.album = ''
+        this.formSearch.artist = '',
+        this.formSearch.album = ''
         this.controller.fetchSongs?.();
+        this.controller.isDeleteSuccess = false;
       },
 
       // Mở modal và lưu id bài hát muốn xóa
       openDeleteModal(id) {
         this.$refs.confirmDialog.openConfirmDialog(id);
-      }
+      },
     },
 
     /**

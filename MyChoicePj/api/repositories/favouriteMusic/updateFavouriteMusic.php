@@ -3,8 +3,8 @@ require_once __DIR__ . "/../../config/database.php";
 require_once __DIR__ . "/../../validates/favouriteMusic.php";
 require_once __DIR__ . "/../../helpers/response.php";
 
-// Repository xử lý thêm FavouriteMusic.
-class AddFavouriteMusic
+// Repository xử lý cập nhật thông tin FavouriteMusic.
+class UpdateFavouriteMusic
 {
     private $db;
 
@@ -19,26 +19,26 @@ class AddFavouriteMusic
     }
 
     /**
-     * Thêm mới thông tin FavouriteMusic
+     * Cập nhật thông tin FavouriteMusic
      * @param {array} $data
      */
-    public function add(array $data)
+    public function update(array $data)
     {
         $now = date("Y-m-d H:i:s");
         $title = $data['title'] ?? '';
         $artist = $data['artist'] ?? '';
         $album = $data['album'] ?? '';
         $release_at = $data['release_at'] ?? null;
-        $created_at = $now;
+        $id = $data['id'] ?? '';
         $updated_at = $now;
         $errors = [];
-        $errors = validateAddFavouriteMusic($data);
+        $errors = validateUpdateFavouriteMusic($data);
         if (!empty($errors)) {
             responseError($errors);
         }
-        $sql = "INSERT INTO songs 
-                (title, artist, album, release_at, created_at, updated_at)
-                VALUES (:title, :artist, :album, :release_at, :created_at, :updated_at)";
+        $sql = "Update songs set title = :title , artist = :artist
+                , album = :album , release_at = :release_at, updated_at = :updated_at
+                where id = :id";
         try {
             $stmt = $this->db->prepare($sql);
             $stmt->execute([
@@ -46,10 +46,10 @@ class AddFavouriteMusic
                 ':artist'     => $artist,
                 ':album'      => $album,
                 ':release_at' => $release_at,
-                ':created_at' => $created_at,
-                ':updated_at' => $updated_at
+                ':updated_at' => $updated_at,
+                ':id'         => $id
             ]);
-            responseSuccess("Thêm mới bài hát thành công");
+            responseSuccess("Cập nhật bài hát thành công");
         } catch (PDOException $e) {
             responseError($e->getMessage());
         }

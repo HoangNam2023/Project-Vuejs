@@ -7,13 +7,15 @@ require_once __DIR__ . "/base.php";
 function validateAddFavouriteMusic(array $data): array
 {
     $rules = [
-        "title"  => ["required", "min:3"],
-        "artist" => ["required", "min:3"]
+        "title"      => ["required", "min:3"],
+        "artist"     => ["required", "min:3"],
+        "release_at" => ["required"]
     ];
 
     $title_item_mapping = [
-        "title"  => "Tên bài hát",
-        "artist" => "Nhạc sĩ"
+        "title"      => "Tên bài hát",
+        "artist"     => "Nhạc sĩ",
+        "release_at" => "Ngày phát hành"
     ];
 
     return validate($rules, $data, $title_item_mapping);
@@ -26,15 +28,16 @@ function validateAddFavouriteMusic(array $data): array
 function validateUpdateFavouriteMusic(array $data): array
 {
     $rules = [
-        "title"  => ["required", "min:3"],
-        "artist" => ["required", "min:3"],
+        "title"      => ["required", "min:3"],
+        "artist"     => ["required", "min:3"],
+        "release_at" => ["required"]
     ];
 
     $title_item_mapping = [
-        "title"  => "Tên bài hát",
-        "artist" => "Tên nhạc sĩ",
+        "title"      => "Tên bài hát",
+        "artist"     => "Tên nhạc sĩ",
+        "release_at" => "Ngày phát hành"
     ];
 
     return validate($rules, $data, $title_item_mapping);
 }
-?>
