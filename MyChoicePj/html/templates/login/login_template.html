@@ -1,0 +1,30 @@
+<form id="login-form" method="post" @submit.prevent="login">
+  <h2 class="set-text-c">Đăng nhập Admin My Choice</h2>
+  <table class="no-search">
+    <tbody>
+      <tr>
+        <td class="set-w-120px">
+          <strong>Tên đăng nhập</strong>
+        </td>
+        <td>
+          <input type="text" v-model="formLogin.user_name" class="set-w-200px" name="user_name" value="">
+        </td>
+      </tr>
+      <tr>
+        <td class="set-w-120px">
+          <strong>Mật khẩu</strong>
+        </td>
+        <td>
+          <input type="text" v-model="formLogin.pass" class="set-w-200px" name="pass" value="">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" class="set-text-c">
+          <button class="update-btn" type="submit">
+            <i class="fa fa-sign-in"></i> Đăng nhập
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>

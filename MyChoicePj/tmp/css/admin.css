@@ -303,8 +303,14 @@ button.back-btn:active {
 .admin-ui #main #main-right .set-text-r {
   text-align: right;
 }
+.admin-ui #main #main-right .set-w-120px {
+  width: 120px;
+}
 .admin-ui #main #main-right .set-w-130px {
   width: 130px;
+}
+.admin-ui #main #main-right .set-w-200px {
+  width: 200px;
 }
 .admin-ui #main #main-right .set-mb-7px {
   margin-bottom: 7px;
