@@ -1,4 +1,6 @@
 <?php
+ini_set('session.gc_maxlifetime', 1);
+session_start();
 require_once __DIR__ . "/../../config/database.php";
 // require_once __DIR__ . "/../../validates/login.php";
 require_once __DIR__ . "/../../helpers/response.php";
@@ -36,7 +38,11 @@ class Login
         if (!$login_check) {
             responseError('Không có dữ liệu bài hát');
         } else {
-            responseSuccess('Đăng nhập thành công');
+            $_SESSION['user'] = $data['user_name'];
+            echo json_encode([
+                "success" => true,
+                "user" => $_SESSION['user']
+            ]);
         }
     }
 }
